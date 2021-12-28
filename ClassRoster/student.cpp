@@ -1,5 +1,20 @@
 #include "student.hpp"
+#include "degree.hpp"
 #include <iostream>
+
+
+void Student::print() {
+    std::cout << studentID << "\n"
+              << firstName << "\n"
+              << lastName << "\n"
+              << emailAddress << "\n"
+              << age << "\n"
+              << daysInCourse[0] << "\n"
+              << daysInCourse[1] << "\n"
+              << daysInCourse[2] << "\n"
+              << degree::sDegreeProgram[this->getDegreeProgram()] << "\n"
+    << std::endl;
+}
 
 std::string Student::getStudentID()
 {
@@ -69,5 +84,4 @@ degree::DegreeProgram Student::getDegreeProgram()
 void Student::setDegreeProgram(degree::DegreeProgram degreeProgramToSet)
 {
     degreeProgram = degreeProgramToSet;
-    std::cout << this->degreeProgram << std::endl;
 }

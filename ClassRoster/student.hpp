@@ -1,3 +1,4 @@
+#pragma once
 #ifndef student_hpp
 #define student_hpp
 
@@ -32,6 +33,8 @@ public:
         daysInCourse.push_back(daysInCourse2);
         daysInCourse.push_back(daysInCourse3);
     };
+    
+    void print();
     
     //Getters and Setters for member variables
     std::string getStudentID();
