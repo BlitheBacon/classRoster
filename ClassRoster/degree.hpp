@@ -6,11 +6,12 @@
 #include <vector>
 #include <string>
 
-class degree
+class Degree
 {
 public:
-    enum DegreeProgram {SECURITY, NETWORK, SOFTWARE};
-    static inline const std::string sDegreeProgram[3] = {"SECURITY", "NETWORK", "SOFTWARE"};
+    //Enum of available degree programs with a parallel string array for printing use
+    enum DegreeProgram {SECURITY, NETWORK, SOFTWARE, NONE};
+    static inline const std::string sDegreeProgram[4] = {"Security", "Network", "Software", "None"};
 };
 
 #endif /* degree_hpp */

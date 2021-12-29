@@ -2,25 +2,47 @@
 #ifndef student_hpp
 #define student_hpp
 
+#include <iostream>
 #include <string>
 #include <experimental/iterator>
 #include <vector>
 #include "degree.hpp"
 
 class Student {
+    //Class Constants
+public:
+    static constexpr int courseNum = 3;
+
+private:
     //Student Attributes
     std::string studentID = "";
     std::string firstName = "";
     std::string lastName = "";
     std::string emailAddress = "";
     int age = 0;
-    std::vector<int> daysInCourse;
-    degree::DegreeProgram degreeProgram;
-
+    int daysInCourses[courseNum];
+    Degree::DegreeProgram degreeProgram;
+    
 public:
-    //Student constructors, both default and parameterized
-    Student();
-    Student(std::string _studentID, std::string _firstName, std::string _lastName, std::string _emailAddress, int _age, int daysInCourse1, int daysInCourse2, int daysInCourse3, degree::DegreeProgram _degreeProgram)
+    //Student constructors and destructors, both default and parameterized
+    Student()
+    {
+        this->studentID = "";
+        this->firstName = "";
+        this->lastName = "";
+        this->emailAddress = "";
+        this->age = 0;
+        this->degreeProgram = Degree::NONE;
+        //Loops through the member array to zero out the array
+        for (int i = 0; i < courseNum; i++) {daysInCourses[i] = 0;}
+    };
+    Student(std::string _studentID,
+            std::string _firstName,
+            std::string _lastName,
+            std::string _emailAddress,
+            int _age,
+            int _daysInCourses[],
+            Degree::DegreeProgram _degreeProgram)
     :
         studentID(_studentID),
         firstName(_firstName),
@@ -29,39 +51,44 @@ public:
         age(_age),
         degreeProgram(_degreeProgram)
     {
-        daysInCourse.push_back(daysInCourse1);
-        daysInCourse.push_back(daysInCourse2);
-        daysInCourse.push_back(daysInCourse3);
+        for (int i = 0; i < courseNum; i++) {
+            daysInCourses[i] = _daysInCourses[i];
+        }
     };
+    //Will be called right after the destructor from Roster for verification of destructor call
+    ~Student()
+    {std::cout << "Destroyed\n";}
     
+    //Full data print for students, used by Roster's printAll function
     void print();
     
     //Getters and Setters for member variables
-    std::string getStudentID();
-    void setStudentID(int ageToSet);
+    //studentID
+    const std::string getStudentID() const;
+    void setStudentID(std::string studentIDToSet);
     
-    std::string getFirstName();
+    //FirstName
+    const std::string getFirstName() const;
     void setFirstName(std::string firstNameToSet);
     
-    std::string getLastName();
+    //LastName
+    const std::string getLastName() const;
     void setLastName(std::string lastNameToSet);
     
-    std::string getEmailAddress();
+    //EmailAddress
+    const std::string getEmailAddress() const;
     void setEmailAddress(std::string emailAddressToSet);
     
-    int getAge();
+    //Age
+    const int getAge() const;
     void setAge(int ageToSet);
     
-    std::vector<int> getDaysInCourse();
-    void setDaysInCourse(int course, int daysInCourseToSet);
+    //DaysInCourses
+    const int* getDaysInCourses() const;
+    void setDaysInCourses(int course, int daysInCourseToSet);
     
-    degree::DegreeProgram getDegreeProgram();
-    void setDegreeProgram(degree::DegreeProgram degreeProgramToSet);
-    
-    /*//Functions for printing/verifying specific student data
-    void printStudentData(Student student);
-    void printAverageDays(std::vector<int> daysInCourse);
-    void verifyEmailAddress(std::string emailAddress);
-    */
+    //DegreeProgram
+    const Degree::DegreeProgram getDegreeProgram() const;
+    void setDegreeProgram(Degree::DegreeProgram degreeProgramToSet);
 };
 #endif /* student_hpp */
