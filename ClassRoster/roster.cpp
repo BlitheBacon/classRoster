@@ -2,6 +2,7 @@
 #include <iostream>
 #include <algorithm>
 #include <string>
+#include <regex>
 
 //Add takes parsed input, manipulates data as needed, and adds a new student
 //      to the roster array
@@ -77,7 +78,13 @@ void Roster::printInvalidEmails() {
         emailCheck = classRosterArray[i]->getEmailAddress();
         //If find returns an npos, this means the character is absent and the
         //      email is printed or skipped accordingly
-        if (emailCheck.find("@") == std::string::npos) {
+        
+        const std::regex pattern("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
+        
+        if (!std::regex_match(emailCheck, pattern)) {
+            std::cout << emailCheck << std::endl;
+        }
+        /*if (emailCheck.find("@") == std::string::npos) {
             std::cout << emailCheck << std::endl;
         }
         else if (emailCheck.find(".") == std::string::npos) {
@@ -85,7 +92,7 @@ void Roster::printInvalidEmails() {
         }
         else if (!(emailCheck.find(" ") == std::string::npos)) {
             std::cout << emailCheck << std::endl;
-        }
+        }*/
     }
 }
 

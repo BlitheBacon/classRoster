@@ -25,8 +25,7 @@ private:
     
 public:
     //Student constructors and destructors, both default and parameterized
-    Student()
-    {
+    Student() {
         this->studentID = "";
         this->firstName = "";
         this->lastName = "";
@@ -56,8 +55,9 @@ public:
         }
     };
     //Will be called right after the destructor from Roster for verification of destructor call
-    ~Student()
-    {std::cout << "Destroyed\n";}
+    ~Student() {
+        std::cout << "Destroyed\n";
+    }
     
     //Full data print for students, used by Roster's printAll function
     void print();
